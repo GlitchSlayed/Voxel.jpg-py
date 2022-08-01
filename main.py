@@ -101,7 +101,6 @@ class Mouse():
         self.visible = False
         self.locked = True
 
-
 # voxel positioning
 for z in range(45):
     for x in range(45):
