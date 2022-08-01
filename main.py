@@ -35,7 +35,7 @@ class Hand(Entity):
     def active(self):
         self.position = Vec2(0.3, -0.5)
 
-    def passive(self):
+    def pasive(self):
         self.position = Vec2(0.4, -0.6)
 
 
@@ -45,7 +45,6 @@ class Hand(Entity):
 
 def refresh():
     hand = Hand()
-    print("I am printing hand",hand)
     global block_pick
 
     if held_keys['left mouse'] or held_keys['right mouse']:
