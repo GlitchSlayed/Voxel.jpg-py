@@ -21,6 +21,7 @@ window.fullscreen = False
 window.exit_button.visible = False
 window.fps_counter.enabled = False
 
+
 # player actions
 
 
@@ -31,7 +32,7 @@ def refresh():
     if held_keys['left mouse'] or held_keys['right mouse']:
         hand.active()
     else:
-        hand.pasive()
+        hand.passive()
 
     if held_keys['1']: block_pick = 1
     if held_keys['2']: block_pick = 2
@@ -40,6 +41,7 @@ def refresh():
 
 
 block_pick = 0
+
 
 # setting up the cube
 class Voxel(Button):
@@ -70,12 +72,13 @@ class Voxel(Button):
 class Sky(Entity):
     def __init__(self):
         super().__init__(
-            parent = scene,
-            model = 'cube',
-            color = color.rgb(115, 180, 255),
-            scale = 1000,
-            double_sided = True # See the sky when you are inside it
+            parent=scene,
+            model='cube',
+            color=color.rgb(115, 180, 255),
+            scale=1000,
+            double_sided=True  # See the sky when you are inside it
         )
+
 
 # setting up the hand
 class Hand(Entity):
@@ -91,9 +94,8 @@ class Hand(Entity):
     def active(self):
         self.position = Vec2(0.3, -0.5)
 
-    def pasive(self):
+    def passive(self):
         self.position = Vec2(0.4, -0.6)
-
 
 
 # mouse locking
@@ -104,6 +106,7 @@ class Mouse():
         self.enabled = False
         self.visible = False
         self.locked = True
+
 
 # voxel positioning
 for z in range(45):
