@@ -1,6 +1,6 @@
 from ursina import *
 from ursina.prefabs.first_person_controller import FirstPersonController
-from ursina.shaders import lit_with_shadows_shader # you have to apply this shader to enties for them to receive shadows.
+from ursina.shaders import lit_with_shadows_shader
 
 app = Ursina()
 
@@ -24,7 +24,11 @@ window.fps_counter.enabled = False
 
 # declaration
 
-block_pick = 0
+camera.fov = 100
+camera.clip_plane_near = 0.1
+camera.clip_plane_far = 1000
+
+block_pick = 1
 
 
 # setting up the hand
@@ -101,7 +105,8 @@ class Mouse():
 # voxel positioning
 for z in range(45):
     for x in range(45):
-        voxel = Voxel(position=(x, 0, z))
+        for y in range (1):
+            voxel = Voxel(position=(x, y, z))
 
 
 # quit key
