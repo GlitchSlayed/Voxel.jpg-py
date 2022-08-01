@@ -1,5 +1,6 @@
 from ursina import *
 from ursina.prefabs.first_person_controller import FirstPersonController
+from ursina.shaders import lit_with_shadows_shader # you have to apply this shader to enties for them to receive shadows.
 
 app = Ursina()
 
@@ -76,7 +77,6 @@ class Voxel(Button):
             texture=texture,
             color=color.color(0, 0, random.uniform(0.9, 1)),
             scale=0.5)
-
     def input(self, key):
         if self.hovered:
             if key == 'right mouse down':
@@ -87,19 +87,6 @@ class Voxel(Button):
 
             if key == 'left mouse down':
                 destroy(self)
-
-
-# setting up the sky
-class Sky(Entity):
-    def __init__(self):
-        super().__init__(
-            parent=scene,
-            model='cube',
-            color=color.rgb(115, 180, 255),
-            scale=1000,
-            double_sided=True  # See the sky when you are inside it
-        )
-
 
 # mouse locking
 
