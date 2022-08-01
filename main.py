@@ -68,7 +68,18 @@ def update():
         block_pick = 3
     if held_keys['4']:
         block_pick = 4
-
+    if held_keys['5']:
+        block_pick = 5
+    if held_keys['6']:
+        block_pick = 6
+    if held_keys['7']:
+        block_pick = 7
+    if held_keys['8']:
+        block_pick = 8
+    if held_keys['9']:
+        block_pick = 9
+    if held_keys['0']:
+        block_pick = 0
 
 # setting up the cube
 class Voxel(Button):
@@ -88,6 +99,12 @@ class Voxel(Button):
                 if block_pick == 2: voxel = Voxel(position=self.position + mouse.normal, texture=stone_texture)
                 if block_pick == 3: voxel = Voxel(position=self.position + mouse.normal, texture=brick_texture)
                 if block_pick == 4: voxel = Voxel(position=self.position + mouse.normal, texture=dirt_texture)
+                if block_pick == 5: voxel = Voxel(position=self.position + mouse.normal, texture=grass_texture)
+                if block_pick == 6: voxel = Voxel(position=self.position + mouse.normal, texture=stone_texture)
+                if block_pick == 7: voxel = Voxel(position=self.position + mouse.normal, texture=brick_texture)
+                if block_pick == 8: voxel = Voxel(position=self.position + mouse.normal, texture=dirt_texture)
+                if block_pick == 9: voxel = Voxel(position=self.position + mouse.normal, texture=brick_texture)
+                if block_pick == 0: voxel = Voxel(position=self.position + mouse.normal, texture=dirt_texture)
 
             if key == 'left mouse down':
                 destroy(self)
