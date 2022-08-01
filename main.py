@@ -1,5 +1,6 @@
 from ursina import *
 from ursina.prefabs.first_person_controller import FirstPersonController
+from threading import Thread
 
 app = Ursina()
 
@@ -21,11 +22,32 @@ window.fullscreen = False
 window.exit_button.visible = False
 window.fps_counter.enabled = False
 
+# declaration
+
+block_pick = 0
+
+
+# setting up the hand
+class Hand(Entity):
+    def __init__(self):
+        super().__init__(
+            parent=camera.ui,
+            model='assets/arm',
+            texture='assets/arm',
+            scale=0.2,
+            rotation=Vec3(150, -10, 0),
+            position=Vec2(0.4, -0.6))
+
+    def active(self):
+        self.position = Vec2(0.3, -0.5)
+
+    def passive(self):
+        self.position = Vec2(0.4, -0.6)
+
 
 # player actions
 
-
-def refresh():
+def update():
     hand = Hand()
     global block_pick
 
@@ -34,13 +56,14 @@ def refresh():
     else:
         hand.passive()
 
-    if held_keys['1']: block_pick = 1
-    if held_keys['2']: block_pick = 2
-    if held_keys['3']: block_pick = 3
-    if held_keys['4']: block_pick = 4
-
-
-block_pick = 0
+    if held_keys['1']:
+        block_pick = 1
+    if held_keys['2']:
+        block_pick = 2
+    if held_keys['3']:
+        block_pick = 3
+    if held_keys['4']:
+        block_pick = 4
 
 
 # setting up the cube
@@ -56,7 +79,6 @@ class Voxel(Button):
             scale=0.5)
 
     def input(self, key):
-        # refresh()
         if self.hovered:
             if key == 'right mouse down':
                 if block_pick == 1: voxel = Voxel(position=self.position + mouse.normal, texture=grass_texture)
@@ -78,24 +100,6 @@ class Sky(Entity):
             scale=1000,
             double_sided=True  # See the sky when you are inside it
         )
-
-
-# setting up the hand
-class Hand(Entity):
-    def __init__(self):
-        super().__init__(
-            parent=camera.ui,
-            model='assets/arm',
-            texture='assets/arm',
-            scale=0.2,
-            rotation=Vec3(150, -10, 0),
-            position=Vec2(0.4, -0.6))
-
-    def active(self):
-        self.position = Vec2(0.3, -0.5)
-
-    def passive(self):
-        self.position = Vec2(0.4, -0.6)
 
 
 # mouse locking
