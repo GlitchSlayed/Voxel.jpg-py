@@ -92,6 +92,15 @@ class Hand(Entity):
     def passive(self):
         self.position = Vec2(0.4, -0.6)
 
+# mouse locking
+
+class Mouse():
+
+    def __init__(self):
+        self.enabled = False
+        self.visible = False
+        self.locked = True
+
 
 # voxel positioning
 for z in range(45):
