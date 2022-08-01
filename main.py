@@ -21,10 +21,31 @@ window.fullscreen = False
 window.exit_button.visible = False
 window.fps_counter.enabled = False
 
+# setting up the hand
+class Hand(Entity):
+    def __init__(self):
+        super().__init__(
+            parent=camera.ui,
+            model='assets/block',
+            texture=arm_texture,
+            scale=0.2,
+            rotation=Vec3(150, -10, 0),
+            position=Vec2(0.4, -0.6))
+
+    def active(self):
+        self.position = Vec2(0.3, -0.5)
+
+    def passive(self):
+        self.position = Vec2(0.4, -0.6)
+
+
 
 # player actions
 
+
 def refresh():
+    hand = Hand()
+    print("I am printing hand",hand)
     global block_pick
 
     if held_keys['left mouse'] or held_keys['right mouse']:
@@ -53,14 +74,15 @@ class Voxel(Button):
             scale=0.5)
 
     def input(self, key):
+        refresh()
         if self.hovered:
-            if key == 'left mouse down':
+            if key == 'right mouse down':
                 if block_pick == 1: voxel = Voxel(position=self.position + mouse.normal, texture=grass_texture)
                 if block_pick == 2: voxel = Voxel(position=self.position + mouse.normal, texture=stone_texture)
                 if block_pick == 3: voxel = Voxel(position=self.position + mouse.normal, texture=brick_texture)
                 if block_pick == 4: voxel = Voxel(position=self.position + mouse.normal, texture=dirt_texture)
 
-            if key == 'right mouse down':
+            if key == 'left mouse down':
                 destroy(self)
 
 
@@ -68,29 +90,13 @@ class Voxel(Button):
 class Sky(Entity):
     def __init__(self):
         super().__init__(
-            parent=scene,
-            model='sphere',
-            texture=sky_texture,
-            scale=150,
-            double_sided=True)
+            parent = scene,
+            model = 'cube',
+            color = color.rgb(115, 180, 255),
+            scale = 1000,
+            double_sided = True # See the sky when you are inside it
+        )
 
-
-# setting up the hand
-class Hand(Entity):
-    def __init__(self):
-        super().__init__(
-            parent=camera.ui,
-            model='assets/arm',
-            texture=arm_texture,
-            scale=0.2,
-            rotation=Vec3(150, -10, 0),
-            position=Vec2(0.4, -0.6))
-
-    def active(self):
-        self.position = Vec2(0.3, -0.5)
-
-    def passive(self):
-        self.position = Vec2(0.4, -0.6)
 
 # mouse locking
 
