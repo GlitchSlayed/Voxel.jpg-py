@@ -56,7 +56,7 @@ class Voxel(Button):
             scale=0.5)
 
     def input(self, key):
-        refresh()
+        # refresh()
         if self.hovered:
             if key == 'right mouse down':
                 if block_pick == 1: voxel = Voxel(position=self.position + mouse.normal, texture=grass_texture)
@@ -85,8 +85,8 @@ class Hand(Entity):
     def __init__(self):
         super().__init__(
             parent=camera.ui,
-            model='assets/block',
-            texture=arm_texture,
+            model='assets/arm',
+            texture='assets/arm',
             scale=0.2,
             rotation=Vec3(150, -10, 0),
             position=Vec2(0.4, -0.6))
