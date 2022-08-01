@@ -1,6 +1,5 @@
 from ursina import *
 from ursina.prefabs.first_person_controller import FirstPersonController
-from threading import Thread
 
 app = Ursina()
 
@@ -18,7 +17,7 @@ arm_texture = load_texture('assets/arm_texture.png')
 window.title = 'Voxel.jpg-py pre-release 0.0.1'
 window.icon = load_texture('/resources/blocks/textures/grass.png')
 window.borderless = False
-window.fullscreen = False
+window.fullscreen = True
 window.exit_button.visible = False
 window.fps_counter.enabled = False
 
