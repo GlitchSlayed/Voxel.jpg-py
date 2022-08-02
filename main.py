@@ -10,6 +10,9 @@ grass_texture = load_texture('assets/grass_block.png')
 stone_texture = load_texture('assets/stone_block.png')
 brick_texture = load_texture('assets/brick_block.png')
 dirt_texture = load_texture('assets/dirt_block.png')
+cobble_texture = load_texture('assets/cobble_block.png')
+spruce_texture = load_texture('assets/spruce_block.png')
+planks_texture = load_texture('assets/planks_block.png')
 sky_texture = load_texture('assets/skybox.png')
 arm_texture = load_texture('assets/arm_texture.png')
 
@@ -24,12 +27,23 @@ window.fps_counter.enabled = False
 
 # declaration
 
-camera.fov = 100
-camera.clip_plane_near = 0.1
-camera.clip_plane_far = 1000
-
 block_pick = 1
 
+
+# charecter controller
+class Player(FirstPersonController):
+    def __init__(self):
+        super(Player, self).__init__()
+        self.camera = camera
+        self.speed = 8
+        camera.fov = 100
+        self.mouse = mouse
+        self.in_menu = False
+        self.crouching = False
+        self.sprinting = False
+
+crouch = Player().crouching
+sprint = Player().sprinting
 
 # setting up the hand
 class Hand(Entity):
@@ -81,6 +95,16 @@ def update():
     if held_keys['0']:
         block_pick = 0
 
+    if held_keys['left control']:
+        sprint = True
+        if sprint == True:
+            player.speed = 15
+    else:
+        sprint = False
+        if sprint == False:
+            player.speed = 8
+
+
 # setting up the cube
 class Voxel(Button):
     def __init__(self, position=(0, 0, 0), texture=grass_texture):
@@ -88,10 +112,11 @@ class Voxel(Button):
             parent=scene,
             position=position,
             model='assets/block',
-            origin_y=0.5,
+            origin_y=0,
             texture=texture,
             color=color.color(0, 0, random.uniform(0.9, 1)),
             scale=0.5)
+
     def input(self, key):
         if self.hovered:
             if key == 'right mouse down':
@@ -99,15 +124,16 @@ class Voxel(Button):
                 if block_pick == 2: voxel = Voxel(position=self.position + mouse.normal, texture=stone_texture)
                 if block_pick == 3: voxel = Voxel(position=self.position + mouse.normal, texture=brick_texture)
                 if block_pick == 4: voxel = Voxel(position=self.position + mouse.normal, texture=dirt_texture)
-                if block_pick == 5: voxel = Voxel(position=self.position + mouse.normal, texture=grass_texture)
-                if block_pick == 6: voxel = Voxel(position=self.position + mouse.normal, texture=stone_texture)
-                if block_pick == 7: voxel = Voxel(position=self.position + mouse.normal, texture=brick_texture)
+                if block_pick == 5: voxel = Voxel(position=self.position + mouse.normal, texture=cobble_texture)
+                if block_pick == 6: voxel = Voxel(position=self.position + mouse.normal, texture=spruce_texture)
+                if block_pick == 7: voxel = Voxel(position=self.position + mouse.normal, texture=planks_texture)
                 if block_pick == 8: voxel = Voxel(position=self.position + mouse.normal, texture=dirt_texture)
                 if block_pick == 9: voxel = Voxel(position=self.position + mouse.normal, texture=brick_texture)
                 if block_pick == 0: voxel = Voxel(position=self.position + mouse.normal, texture=dirt_texture)
 
             if key == 'left mouse down':
                 destroy(self)
+
 
 # mouse locking
 
@@ -119,10 +145,20 @@ class Mouse():
         self.locked = True
 
 
+class Sky(Entity):
+    def __init__(self):
+        super().__init__(
+            parent=scene,
+            model='sphere',
+            texture='sky_sunset',
+            scale=150,
+            double_sided=True)
+
+
 # voxel positioning
 for z in range(45):
     for x in range(45):
-        for y in range (1):
+        for y in range(1):
             voxel = Voxel(position=(x, y, z))
 
 
