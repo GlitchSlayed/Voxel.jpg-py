@@ -107,6 +107,7 @@ class Hand(Entity):
         )
 
     # Arm animations
+
     def active(self):
         self.rotation = Vec3(160, -5, 0)
         self.position = Vec2(0.4, -0.5)
