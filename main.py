@@ -42,25 +42,9 @@ class Player(FirstPersonController):
         self.crouching = False
         self.sprinting = False
 
+
 crouch = Player().crouching
 sprint = Player().sprinting
-
-# setting up the hand
-class Hand(Entity):
-    def __init__(self):
-        super().__init__(
-            parent=camera.ui,
-            model='assets/arm',
-            texture='assets/arm',
-            scale=0.2,
-            rotation=Vec3(150, -10, 0),
-            position=Vec2(0.4, -0.6))
-
-    def active(self):
-        self.position = Vec2(0.3, -0.5)
-
-    def passive(self):
-        self.position = Vec2(0.4, -0.6)
 
 
 # player actions
@@ -97,12 +81,38 @@ def update():
 
     if held_keys['left control']:
         sprint = True
-        if sprint == True:
-            player.speed = 15
+        player.speed = 15
+        camera.fov = 105
+
+    elif held_keys['left shift']:
+        crouch = True
+        player.speed = 5
+        camera.fov = 92
     else:
-        sprint = False
-        if sprint == False:
-            player.speed = 8
+        crouch = False
+        player.speed = 8
+        camera.fov = 100
+
+
+# setting up the hand
+class Hand(Entity):
+    def __init__(self):
+        super().__init__(
+            parent=camera.ui,
+            model='assets/arm',
+            texture='assets/arm.png',
+            scale=0.2,
+            rotation=Vec3(160, -5, 0),
+            position=Vec2(0.5, -0.6)
+        )
+
+    # Arm animations
+    def active(self):
+        self.rotation = Vec3(160, -5, 0)
+        self.position = Vec2(0.4, -0.5)
+
+    def passive(self):
+        self.position = Vec2(0.5, -0.6)
 
 
 # setting up the cube
