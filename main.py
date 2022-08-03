@@ -1,6 +1,5 @@
 from ursina import *
 from ursina.prefabs.first_person_controller import FirstPersonController
-from ursina.shaders import lit_with_shadows_shader
 
 app = Ursina()
 
@@ -30,7 +29,7 @@ window.fps_counter.enabled = True
 block_pick = 1
 
 
-# charecter controller
+# character controller
 class Player(FirstPersonController):
     def __init__(self):
         super(Player, self).__init__()
@@ -166,8 +165,8 @@ class Sky(Entity):
 
 
 # voxel positioning
-for z in range(45):
-    for x in range(45):
+for z in range(40):
+    for x in range(40):
         for y in range(1):
             voxel = Voxel(position=(x, y, z))
 
