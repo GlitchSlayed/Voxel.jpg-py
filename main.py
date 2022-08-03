@@ -45,13 +45,8 @@ class Player(FirstPersonController):
 # player actions
 
 def update():
-    hand = Hand()
     global block_pick
-
-    if held_keys['left mouse'] or held_keys['right mouse']:
-        hand.active()
-    else:
-        hand.passive()
+    global hand
 
     if held_keys['1']:
         block_pick = 1
@@ -92,21 +87,14 @@ class Hand(Entity):
         super().__init__(
             parent=camera.ui,
             model='assets/arm',
-            texture='assets/arm.png',
             scale=0.20,
+            texture='assets/arm.png',
             rotation=Vec3(160, -5, 0),
             position=Vec2(0.5, -0.6)
         )
 
-    # Arm animations
 
-    @staticmethod
-    def active():
-        scale = 0.20
-
-    @staticmethod
-    def passive():
-        scale = 0.20
+hand = Hand()
 
 
 # setting up the cube
@@ -150,7 +138,6 @@ class Voxel(Button):
 
 
 # mouse locking
-
 class Mouse:
 
     def __init__(self):
@@ -159,6 +146,7 @@ class Mouse:
         self.locked = True
 
 
+# sky box
 class Sky(Entity):
     def __init__(self):
         super().__init__(
