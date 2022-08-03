@@ -20,7 +20,9 @@ Keybinds
 
 -Ctrl for sprint
 
+________________________________________________________________________
 
+# Contributions
 
 PR's open, feel free to contribute
 
