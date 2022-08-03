@@ -22,7 +22,7 @@ Keybinds
 
 ________________________________________________________________________
 
-#Contributions
+# Contributions
 
 PR's open, feel free to contribute
 
