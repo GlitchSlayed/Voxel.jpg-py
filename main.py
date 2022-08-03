@@ -1,5 +1,6 @@
 from ursina import *
 from ursina.prefabs.first_person_controller import FirstPersonController
+from numba import jit
 
 app = Ursina()
 
@@ -43,7 +44,6 @@ class Player(FirstPersonController):
 
 
 # player actions
-
 def update():
     global block_pick
     global hand
