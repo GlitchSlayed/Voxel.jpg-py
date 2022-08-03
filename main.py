@@ -42,10 +42,6 @@ class Player(FirstPersonController):
         self.sprinting = False
 
 
-crouch = Player().crouching
-sprint = Player().sprinting
-
-
 # player actions
 
 def update():
@@ -79,16 +75,13 @@ def update():
         block_pick = 0
 
     if held_keys['left control']:
-        sprint = True
         player.speed = 15
         camera.fov = 107
 
     elif held_keys['left shift']:
-        crouch = True
         player.speed = 5
         camera.fov = 92
     else:
-        crouch = False
         player.speed = 8
         camera.fov = 100
 
@@ -107,10 +100,12 @@ class Hand(Entity):
 
     # Arm animations
 
-    def active(self):
+    @staticmethod
+    def active():
         scale = 0.20
 
-    def passive(self):
+    @staticmethod
+    def passive():
         scale = 0.20
 
 
@@ -129,16 +124,26 @@ class Voxel(Button):
     def input(self, key):
         if self.hovered:
             if key == 'right mouse down':
-                if block_pick == 1: voxel = Voxel(position=self.position + mouse.normal, texture=grass_texture)
-                if block_pick == 2: voxel = Voxel(position=self.position + mouse.normal, texture=stone_texture)
-                if block_pick == 3: voxel = Voxel(position=self.position + mouse.normal, texture=brick_texture)
-                if block_pick == 4: voxel = Voxel(position=self.position + mouse.normal, texture=dirt_texture)
-                if block_pick == 5: voxel = Voxel(position=self.position + mouse.normal, texture=cobble_texture)
-                if block_pick == 6: voxel = Voxel(position=self.position + mouse.normal, texture=spruce_texture)
-                if block_pick == 7: voxel = Voxel(position=self.position + mouse.normal, texture=planks_texture)
-                if block_pick == 8: voxel = Voxel(position=self.position + mouse.normal, texture=dirt_texture)
-                if block_pick == 9: voxel = Voxel(position=self.position + mouse.normal, texture=brick_texture)
-                if block_pick == 0: voxel = Voxel(position=self.position + mouse.normal, texture=dirt_texture)
+                if block_pick == 1:
+                    Voxel(position=self.position + mouse.normal, texture=grass_texture)
+                if block_pick == 2:
+                    Voxel(position=self.position + mouse.normal, texture=stone_texture)
+                if block_pick == 3:
+                    Voxel(position=self.position + mouse.normal, texture=brick_texture)
+                if block_pick == 4:
+                    Voxel(position=self.position + mouse.normal, texture=dirt_texture)
+                if block_pick == 5:
+                    Voxel(position=self.position + mouse.normal, texture=cobble_texture)
+                if block_pick == 6:
+                    Voxel(position=self.position + mouse.normal, texture=spruce_texture)
+                if block_pick == 7:
+                    Voxel(position=self.position + mouse.normal, texture=planks_texture)
+                if block_pick == 8:
+                    Voxel(position=self.position + mouse.normal, texture=dirt_texture)
+                if block_pick == 9:
+                    Voxel(position=self.position + mouse.normal, texture=brick_texture)
+                if block_pick == 0:
+                    Voxel(position=self.position + mouse.normal, texture=dirt_texture)
 
             if key == 'left mouse down':
                 destroy(self)
@@ -146,7 +151,7 @@ class Voxel(Button):
 
 # mouse locking
 
-class Mouse():
+class Mouse:
 
     def __init__(self):
         self.enabled = False
