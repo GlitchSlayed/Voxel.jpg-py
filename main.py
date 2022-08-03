@@ -18,12 +18,12 @@ arm_texture = load_texture('assets/arm_texture.png')
 
 # window setup
 
-window.title = 'Voxel.jpg-py pre-release 0.0.1'
+window.title = 'Voxel.jpg-py pre-release 0.0.3'
 window.icon = load_texture('/resources/blocks/textures/grass.png')
 window.borderless = False
 window.fullscreen = True
 window.exit_button.visible = False
-window.fps_counter.enabled = False
+window.fps_counter.enabled = True
 
 # declaration
 
@@ -82,7 +82,7 @@ def update():
     if held_keys['left control']:
         sprint = True
         player.speed = 15
-        camera.fov = 105
+        camera.fov = 107
 
     elif held_keys['left shift']:
         crouch = True
@@ -101,7 +101,7 @@ class Hand(Entity):
             parent=camera.ui,
             model='assets/arm',
             texture='assets/arm.png',
-            scale=0.2,
+            scale=0.20,
             rotation=Vec3(160, -5, 0),
             position=Vec2(0.5, -0.6)
         )
@@ -109,11 +109,10 @@ class Hand(Entity):
     # Arm animations
 
     def active(self):
-        self.rotation = Vec3(160, -5, 0)
-        self.position = Vec2(0.4, -0.5)
+        scale = 0.20
 
     def passive(self):
-        self.position = Vec2(0.5, -0.6)
+        scale = 0.20
 
 
 # setting up the cube
@@ -181,6 +180,4 @@ def input(key):
 
 player = FirstPersonController()
 sky = Sky()
-hand = Hand()
-
 app.run()
