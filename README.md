@@ -1,4 +1,9 @@
 # Voxel.jpg-py
+
+![badge](https://img.shields.io/github/issues/GlitchSlayed/Voxel.jpg-py)
+![second](https://img.shields.io/github/stars/GlitchSlayed/Voxel.jpg-py)
+![third](https://img.shields.io/github/license/GlitchSlayed/Voxel.jpg-py)
+
 Very basic Minecraft inspired voxel game made in python, using the Ursina game engine
 
 Currently implemented
