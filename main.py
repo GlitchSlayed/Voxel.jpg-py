@@ -15,6 +15,7 @@ spruce_texture = load_texture('assets/spruce_block.png')
 planks_texture = load_texture('assets/planks_block.png')
 sky_texture = load_texture('assets/skybox.png')
 arm_texture = load_texture('assets/arm_texture.png')
+image = load_texture('assets/image.png')
 
 # window setup
 
@@ -131,7 +132,7 @@ class Voxel(Button):
                 if block_pick == 9:
                     Voxel(position=self.position + mouse.normal, texture=brick_texture)
                 if block_pick == 0:
-                    Voxel(position=self.position + mouse.normal, texture=dirt_texture)
+                    Voxel(position=self.position + mouse.normal, texture=image)
 
             if key == 'left mouse down':
                 destroy(self)
