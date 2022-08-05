@@ -32,3 +32,5 @@ ________________________________________________________________________
 https://www.ursinaengine.org/installation.html
 
 Follow this installer and also add the optional ursina extras packages, then simply run the main.py file and enjoy
+
+Written in python 3.10
