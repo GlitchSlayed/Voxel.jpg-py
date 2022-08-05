@@ -1,24 +1,33 @@
 # Voxel.jpg-py
-Minecraft inspired voxel game made in python, using the Ursina game engine
+Very basic Minecraft inspired voxel game made in python, using the Ursina game engine
 
+Currently implemented
+
+- Character Controller
+- 8 by 8 voxels
+- Skybox
+- Basic Lighting
+- 7 diffrent voxels (blocks)
+
+_______________________________________________________________________
 
 Keybinds
 
--W for forward
+- W for forward
 
--A for left
+- A for left
 
--S for down
+- S for down
 
--D for right
+- D for right
 
--Q for quit
+- Q for quit
 
--Space for jump
+- Space for jump
 
--Shift for crouch
+- Shift for crouch
 
--Ctrl for sprint
+- Ctrl for sprint
 
 ________________________________________________________________________
 
