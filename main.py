@@ -1,6 +1,7 @@
 from ursina import *
 from ursina.prefabs.first_person_controller import FirstPersonController
 from numba import jit
+from game_logic import movement_settings, selected_block_pick, texture_name_for_pick
 
 app = Ursina()
 
@@ -49,37 +50,8 @@ def update():
     global block_pick
     global hand
 
-    if held_keys['1']:
-        block_pick = 1
-    if held_keys['2']:
-        block_pick = 2
-    if held_keys['3']:
-        block_pick = 3
-    if held_keys['4']:
-        block_pick = 4
-    if held_keys['5']:
-        block_pick = 5
-    if held_keys['6']:
-        block_pick = 6
-    if held_keys['7']:
-        block_pick = 7
-    if held_keys['8']:
-        block_pick = 8
-    if held_keys['9']:
-        block_pick = 9
-    if held_keys['0']:
-        block_pick = 0
-
-    if held_keys['left control']:
-        player.speed = 15
-        camera.fov = 107
-
-    elif held_keys['left shift']:
-        player.speed = 5
-        camera.fov = 92
-    else:
-        player.speed = 8
-        camera.fov = 100
+    block_pick = selected_block_pick(held_keys, block_pick)
+    player.speed, camera.fov = movement_settings(held_keys)
 
 
 # setting up the hand
@@ -113,26 +85,18 @@ class Voxel(Button):
     def input(self, key):
         if self.hovered:
             if key == 'right mouse down':
-                if block_pick == 1:
-                    Voxel(position=self.position + mouse.normal, texture=grass_texture)
-                if block_pick == 2:
-                    Voxel(position=self.position + mouse.normal, texture=stone_texture)
-                if block_pick == 3:
-                    Voxel(position=self.position + mouse.normal, texture=brick_texture)
-                if block_pick == 4:
-                    Voxel(position=self.position + mouse.normal, texture=dirt_texture)
-                if block_pick == 5:
-                    Voxel(position=self.position + mouse.normal, texture=cobble_texture)
-                if block_pick == 6:
-                    Voxel(position=self.position + mouse.normal, texture=spruce_texture)
-                if block_pick == 7:
-                    Voxel(position=self.position + mouse.normal, texture=planks_texture)
-                if block_pick == 8:
-                    Voxel(position=self.position + mouse.normal, texture=dirt_texture)
-                if block_pick == 9:
-                    Voxel(position=self.position + mouse.normal, texture=brick_texture)
-                if block_pick == 0:
-                    Voxel(position=self.position + mouse.normal, texture=image)
+                texture_name = texture_name_for_pick(block_pick)
+                textures = {
+                    'grass': grass_texture,
+                    'stone': stone_texture,
+                    'brick': brick_texture,
+                    'dirt': dirt_texture,
+                    'cobble': cobble_texture,
+                    'spruce': spruce_texture,
+                    'planks': planks_texture,
+                    'image': image,
+                }
+                Voxel(position=self.position + mouse.normal, texture=textures[texture_name])
 
             if key == 'left mouse down':
                 destroy(self)
@@ -173,4 +137,7 @@ def input(key):
 
 player = FirstPersonController()
 sky = Sky()
-app.run()
+
+
+if __name__ == '__main__':
+    app.run()
