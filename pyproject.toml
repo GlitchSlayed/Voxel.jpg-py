@@ -1,0 +1,17 @@
+[project]
+name = "voxel-jpg-py"
+version = "0.0.3"
+description = "Very basic Minecraft-inspired voxel game made in Python using the Ursina game engine."
+readme = "README.md"
+requires-python = ">=3.10"
+dependencies = [
+    "ursina",
+]
+
+[dependency-groups]
+dev = [
+    "pytest",
+]
+
+[tool.uv]
+package = false

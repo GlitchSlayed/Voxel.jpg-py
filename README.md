@@ -43,8 +43,25 @@ PR's open, feel free to contribute
 ________________________________________________________________________
 
 # Installation
-https://www.ursinaengine.org/installation.html
 
-Follow this installer and also add the optional ursina extras packages, then simply run the main.py file and enjoy
+This project uses the [Astral uv](https://docs.astral.sh/uv/) package manager.
 
-Written in python 3.10
+Install dependencies with uv:
+
+```bash
+uv sync
+```
+
+Run the game:
+
+```bash
+uv run python main.py
+```
+
+Run the tests:
+
+```bash
+uv run pytest
+```
+
+Written in Python 3.10+.
