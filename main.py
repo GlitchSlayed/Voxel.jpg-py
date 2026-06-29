@@ -1,6 +1,5 @@
 from ursina import *
 from ursina.prefabs.first_person_controller import FirstPersonController
-from numba import jit
 from game_logic import movement_settings, selected_block_pick, texture_name_for_pick
 
 app = Ursina()
